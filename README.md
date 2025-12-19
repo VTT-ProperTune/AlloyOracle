@@ -1,11 +1,12 @@
 
 # **Deep Learning Accelerated Multi-Criteria Screening of Chromium-Based A2+B2 Superalloys Across 11 Elements**
 
-This repository contains datasets and scripts to reproduce selected datasets and results from the study.
+This repository contains datasets and scripts to reproduce selected datasets and results of the article.
 
 ---
 
 ## **TODO**
+- Add license information.
 - Add citation information.
 
 ---
@@ -15,7 +16,7 @@ This repository contains datasets and scripts to reproduce selected datasets and
 A `requirements.txt` file is included for installing the required Python packages (excluding `tc-python`, which must be installed after Thermo-Calc).
 
 1. **Install Thermo-Calc** (tested with version **2025b**).
-2. **Install Python packages** from `requirements2. **Install Python packages** from `requirements.txt` (Python **3.9.17**).
+2. **Install Python packages** from `requirements.txt` (Python **3.9.17**).
 3. **Install `tc_python`** (`tc-python==2025.2.30`) using the Python wheel provided with Thermo-Calc 2025b.
 
 ---
@@ -34,19 +35,10 @@ A `requirements.txt` file is included for installing the required Python package
 
 ---
 
-### **Data Splitting**
-After CALPHAD data generation, postprocessing and splitting are performed in `postprocess_and_split_dataset.py` (`random_seed = 42`):
-
-- **Dataset_B**  
-  → `B_dev` (85%)  
-  → `B_test` (15%)
-
----
-
 ## **Surrogate Modeling**
 
 ### **Hyperparameter Optimization**
-Using the temperature-based split, `Dataset B (B_dev)` is divided into (`random_seed = 1234`):
+Using `postprocess_and_split_dataset.split_by_temperature_ratio` method, `Dataset B (B_dev)` is divided into (with `random_seed = 1234`):
 
 - **`B_dev_temp` (85%)**  
   Used to train the DNN model after splitting into training and early stopping subsets (`random_seed = 2468`):  
@@ -60,7 +52,7 @@ Using the temperature-based split, `Dataset B (B_dev)` is divided into (`random_
 ---
 
 ### **Training the Final Screening Model**
-Using the temperature-based split in `split_by_temperature.py`, `Dataset B (B_dev)` is divided into (`random_seed = 2468`):  
+Using the temperature-based split in `split_by_temperature.py`, `Dataset B (B_dev)` is divided into (with `random_seed = 2468`):  
 → `B_dev_training` (85%)  
 → `B_dev_early_stopping` (15%)  
 *TensorFlow random seed set with `tf.random.set_seed(2468)`.*  
@@ -78,7 +70,6 @@ Using the temperature-based split in `split_by_temperature.py`, `Dataset B (B_de
 ---
 
 ## **License**
-*(Add license information here if applicable)*
 
 ---
 
