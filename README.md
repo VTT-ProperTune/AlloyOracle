@@ -21,17 +21,22 @@ A `requirements.txt` file is included for installing the required Python package
 
 ---
 
-## **Description of Files**  
+## **Description of the scripts**  
 *(Run the scripts in this order to create datasets `B_dev` and `B_test`)*
 
-- **`composition_pool_generator.py`**  
-  Generates the compositions (inputs for Dataset B).
+- **`composition_pool_generator.py`**: Generates the compositions (inputs for Dataset B).
+  
+- **`calphad_data_generator.py`**: Runs CALPHAD calculations for the given composition set at multiple temperatures using asynchronous parallel processing (outputs for Dataset B).
 
-- **`calphad_data_generator.py`**  
-  Runs CALPHAD calculations for the given composition set at multiple temperatures using asynchronous parallel processing (outputs for Dataset B).
+- **`postprocess_and_split_dataset.py`**: Postprocesses and splits the generated Dataset B into `B_dev` and `B_test` as described below.
 
-- **`postprocess_and_split_dataset.py`**  
-  Postprocesses and splits the generated Dataset B into `B_dev` and `B_test` as described below.
+## **Description of the datasets**
+
+- **`dataset_a_dev_compositions.h5`**: Compositions of dataset A_dev.
+
+- **`dataset_a_test_compositions.h5`**: Compositions of dataset A_test.
+
+- **`compositions_validated_feasible.h5`**: Compositions of the criteria-fulfilling alloys.
 
 ---
 
