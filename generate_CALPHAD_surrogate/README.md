@@ -13,7 +13,7 @@
 
 - **`dataset_a_test_compositions.h5`**: Compositions of dataset A_test.
 
-- **`compositions_validated_feasible.h5`**: Compositions of the criteria-fulfilling alloys.
+- **`compositions_validated_feasible.h5`**: Compositions of the criteria-fulfilling alloys (users with proper TC license can generate this).
 
 ---
 
