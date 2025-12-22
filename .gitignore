@@ -1,0 +1,14 @@
+
+# Postprocessing outputs / local data
+#postprocessing/data/
+#postprocessing/*.xlsx
+
+# VIM swap files not tracked
+*.swp
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
