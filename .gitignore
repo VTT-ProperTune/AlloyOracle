@@ -12,3 +12,7 @@
 # Python
 __pycache__/
 *.pyc
+
+# Generated CALPHAD data files
+*.h5
+generate_CALPHAD_surrogate/compositions_validated_feasible.h5
