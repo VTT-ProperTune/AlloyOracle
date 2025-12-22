@@ -5,7 +5,6 @@ This repository contains datasets and scripts to reproduce selected datasets and
 ---
 
 ## **TODO**
-- Add license information.
 - Add citation information.
 
 ---
