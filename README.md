@@ -1,11 +1,6 @@
 # **Deep Learning Accelerated Multi-Criteria Screening of Chromium-Based A2+B2 Superalloys Across 11 Elements**
 
-This repository contains datasets and scripts to reproduce selected datasets and results of the article.
-
----
-
-## **TODO**
-- Add citation information.
+This repository contains datasets and scripts to reproduce selected datasets and results of the article 'Accelerated discovery of Cr-based A2+B2 superalloys across 11 elements with a deep-learning CALPHAD surrogate'.
 
 ---
 
