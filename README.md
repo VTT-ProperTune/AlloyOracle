@@ -2,34 +2,89 @@
 
 This repository contains datasets and scripts to reproduce selected datasets and results of the article 'Accelerated discovery of Cr-based A2+B2 superalloys across 11 elements with a deep-learning CALPHAD surrogate'.
 
----
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
-## **Prerequisites**
+## Prerequisites
 
 A `requirements.txt` file is included for installing the required Python packages (excluding `tc-python`, which must be installed after Thermo-Calc).
 
-1. **Install Thermo-Calc** (tested with version **2025b**).
-2. **Install Python packages** from `requirements.txt` (Python **3.9.17**).
-3. **Install `tc_python`** (`tc-python==2025.2.30`) using the Python wheel provided with Thermo-Calc 2025b.
+### System Requirements
+- Python 3.9.17
+- Thermo-Calc version 2025b
 
-> Note: As Thermo-Calc license do not permit the open release of large calculated datasets, 
-> only a 100-composition 'dummy' version of the full set of feasible compositions (roughly 15,000 compositions).
-> Therefore, to reproduce some of the figures in the manuscript, a license to the commercial TCHEA7 database is needed.
+### Python Packages
+Install the required packages using:
+```
+pip install -r requirements.txt
+```
 
----
+Required packages include:
+- joblib=1.4.2
+- matplotlib=3.8.4
+- openpyxl=3.1.5
+- pandas=1.4.4
+- scikit-learn=1.2.2
+- scipy=1.12.0
+- h5py==3.11.0
+- keras==2.15.0
+- numpy==1.26.4
+- tensorflow==2.15.1
 
-## **Description of folders**
-- **`generate_surrogate_model`**: contains the scripts to generate Thermo-Calc data and the CALPHAD surrogate model.
-- **`analyze_feasible_compositions`**: contains the scripts to analyze the feasible compositions (alloy families, VEC-strength scatter plots).
-- **`analyze_experimental_compositions`**: contains the scripts to visualize DFT-derived properties (strength, D-parameters).
-- **`helper_functions`**: functions to calculate edge-slip disclocation strength, VEC, and misfit volumes.
+### Thermo-Calc Setup
+1. Install Thermo-Calc (tested with version 2025b).
+2. Install `tc-python` (`tc-python==2025.2.30`) using the Python wheel provided with Thermo-Calc 2025b.
 
----
+> **Note:** As Thermo-Calc licenses do not permit the open release of large calculated datasets, only a 100-composition 'dummy' version of the full set of feasible compositions (roughly 15,000 compositions) is provided. Therefore, to reproduce some of the figures in the manuscript, a license to the commercial TCHEA7 database is needed.
 
-## **License**
-This project is licensed under the GNU Affero General Public License v3.0 or later (AGPL-3.0-or-later). See the LICENSE file.
+## Repository Structure
 
----
+- **`data_generation/`**: Scripts for generating and processing CALPHAD datasets
+- **`surrogate_modeling/`**: Code for training surrogate models
+- **`screening/`**: Screening pipeline for candidate compositions
+- **`analyze_feasible_candidates/`**: Analysis and visualization of screening results
+- **`analyze_experimental_compositions/`**: Analysis of experimental data
+- **`helper_functions/`**: Utility functions for calculations (yield strength, VEC, misfit volumes)
+- **`shared/`**: Shared utilities and common functions
 
-## **Citation**
+## Workflow
+
+Follow these steps to reproduce the datasets and results:
+
+### 1. Generate Dataset B
+Run the **`data_generation/calphad_data_generator.py`** to reproduce Dataset B `dataset_b.h5` using `compositions_b.h5` as input.
+
+**Note:** Due to CALPHAD convergence issues, some data points might be missing. The process involves iterative calculations:
+- Initial CALPHAD calculations
+- Comparison with input composition set
+- Recalculation of missing compositions
+- Repeat until most compositions are calculated
+
+### 2. Postprocess and Split Dataset B
+Rung the **`data_generation/postprocess_and_split_dataset.py`** to process and split `dataset_b.h5` into development and test sets. This creates `dataset_b_dev.h5` and `dataset_b_test.h5`.
+
+### 3. Train Surrogate Model
+Run **`surrogate_modeling/main.py`** to create the surrogate model with optimized hyperparameters. Move the generated `model/` folder to the `screening/` folder.
+
+### 4. Generate Composition Pool
+Create the composition candidate pool for screening with **`data_generation/composition_pool_generator.py`**. Move the generated `composition_pool_screening.h5` to the `screening/` folder.
+
+### 5. Perform Screening
+Execute the screening step with **`screening/main.py`** to identify feasible candidates. This produces `feasible_candidates.xlsx`.
+
+### 6. Analyze Results
+-`analyze_feasible_candidates/`: analyze the feasible compositions (alloy families, VEC-strength scatter plots).
+-`analyze_experimental_compositions`: contains the scripts to visualize DFT-derived properties (strength, D-parameters).
+
+## Usage Tips
+
+- Ensure Thermo-Calc is properly configured before running data generation scripts.
+- When working with CALPHAD data, be aware of potential convergence issues and missing data points.
+- Check file paths and dependencies when moving generated files between folders
+
+## License
+
+This project is licensed under the GNU Affero General Public License v3.0 or later (AGPL-3.0-or-later). See the LICENSE file for details.
+
+## Citation
+
 - TBA

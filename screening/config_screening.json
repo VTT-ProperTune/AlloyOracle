@@ -1,0 +1,116 @@
+{
+	"results_folder": "results",
+	
+	"filepath_candidate_pool": "composition_pool_screening.h5",
+	"model_folder": "model//",
+	
+	"tc": {
+		"tc_batch_size": 100,
+		"tc_phases": ["LIQUID",
+				   "BCC_B2#1",
+				   "BCC_B2#2",
+				   "BCC_B2#3",
+				   "BCC_B2#4",
+				   "OTHER_PHASES"],
+		"bcc_site_fraction_absdiff_cutoff": 1e-3,
+		"max_b2_index": 4
+	},
+	
+	"multiprocessing_ncpu": null, 
+    "n_compositions_validate_max": 20000,
+    "preselection_method": "kmeans",
+    "kmeans_based_on_matrix": true,
+    "phase_composition_evaluation_temperature": 1000,
+    
+	"LIMIT_POOL_SIZE_FOR_TESTING": null,
+	
+	"phases": ["LIQUID", "A2", "B2", "OTHER_PHASES"],
+	
+    "outputs": [
+        "LIQUID", "A2", "B2", "OTHER_PHASES",
+        "Cr_in_A2",
+        "Al_in_A2",
+        "Fe_in_A2",
+        "Ni_in_A2",
+        "Ti_in_A2",
+        "V_in_A2",
+        "Mo_in_A2",
+        "W_in_A2",
+        "Mn_in_A2",
+        "Si_in_A2",
+        "Co_in_A2"
+    ],
+    
+    "outputs_a2_composition": [
+        "Cr_in_A2",
+        "Al_in_A2",
+        "Fe_in_A2",
+        "Ni_in_A2",
+        "Ti_in_A2",
+        "V_in_A2",
+        "Mo_in_A2",
+        "W_in_A2",
+        "Mn_in_A2",
+        "Si_in_A2",
+        "Co_in_A2"
+    ],
+	
+	"loss_threshold": 0.005,
+    "loss_threshold_sim": 0.0001,
+    
+    "criteria": [
+        {
+            "T": 1400,
+            "output": [
+                "A2"
+            ],
+            "constraint": "equal",
+            "limit": 1
+        },
+		{
+            "T": 1200,
+            "output": [
+                "A2"
+            ],
+            "constraint": "equal",
+            "limit": 1
+        },
+		{
+            "T": 1000,
+            "output": [
+                "B2"
+            ],
+            "constraint": "between",
+            "limit": [
+                0.03,
+                0.5
+            ]
+        },
+        {
+            "T": 1000,
+            "output": [
+                "A2",
+                "B2"
+            ],
+            "constraint": "sum",
+            "limit": 1
+        },
+        {
+            "T": 1000,
+            "output": [
+                "Cr_in_A2",
+                "Al_in_A2",
+                "Fe_in_A2",
+                "Ni_in_A2",
+                "Ti_in_A2",
+                "V_in_A2",
+                "Mo_in_A2",
+                "W_in_A2",
+                "Mn_in_A2",
+                "Si_in_A2",
+                "Co_in_A2"
+            ],
+            "constraint": "first_greater_than_others"
+        }
+	]
+}
