@@ -18,18 +18,6 @@ Install the required packages using:
 pip install -r requirements.txt
 ```
 
-Required packages include:
-- joblib=1.4.2
-- matplotlib=3.8.4
-- openpyxl=3.1.5
-- pandas=1.4.4
-- scikit-learn=1.2.2
-- scipy=1.12.0
-- h5py==3.11.0
-- keras==2.15.0
-- numpy==1.26.4
-- tensorflow==2.15.1
-
 ### Thermo-Calc Setup
 1. Install Thermo-Calc (tested with version 2025b).
 2. Install `tc-python` (`tc-python==2025.2.30`) using the Python wheel provided with Thermo-Calc 2025b.
