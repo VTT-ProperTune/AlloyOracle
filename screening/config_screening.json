@@ -18,11 +18,7 @@
 	
 	"multiprocessing_ncpu": null, 
     "n_compositions_validate_max": 20000,
-    "preselection_method": "kmeans",
-    "kmeans_based_on_matrix": true,
     "phase_composition_evaluation_temperature": 1000,
-    
-	"LIMIT_POOL_SIZE_FOR_TESTING": null,
 	
 	"phases": ["LIQUID", "A2", "B2", "OTHER_PHASES"],
 	

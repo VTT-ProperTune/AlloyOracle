@@ -19,8 +19,7 @@ def LimitNumberOfCompositions(eval_results, config):
         eval_results (dict): Evaluation dictionary produced by
             `candidate_evaluation.SurrogateEvaluation` containing
             `'x_feasible'`, `'y_feasible'`, and `'losses_feasible'`.
-        config (dict): Screening configuration with keys
-            `'n_compositions_validate_max'` and `'kmeans_based_on_matrix'`.
+        config (dict): Screening configuration.
 
     Returns:
         dict: `eval_results` reduced to selected indices.
@@ -36,15 +35,7 @@ def LimitNumberOfCompositions(eval_results, config):
     n_clusters = config['n_compositions_validate_max']
     scaler = StandardScaler()
     kmeans = MiniBatchKMeans(n_clusters=n_clusters, batch_size=1024*16, random_state=1234)
-    x_norm = scaler.fit_transform(x)
-
-    if config['kmeans_based_on_matrix']:
-        x_unscaled = y[config['phase_composition_evaluation_temperature']][config['outputs_a2_composition']]
-    else:
-        x_unscaled = x
-        labels = kmeans.predict(x_norm)
-        clustering_space = x_norm
-        
+    x_unscaled = y[config['phase_composition_evaluation_temperature']][config['outputs_a2_composition']]
     x_norm = scaler.fit_transform(x_unscaled)
     kmeans.fit(x_norm)
     labels = kmeans.predict(x_norm)

@@ -25,9 +25,6 @@ def main():
         num_processes = int(os.environ.get('SLURM_CPUS_PER_TASK', multiprocessing.cpu_count()))
         config['multiprocessing_ncpu'] = num_processes
 
-    print("config['preselection_method']:", config['preselection_method'])
-    print("config['n_compositions_validate_max']:", config['n_compositions_validate_max'])
-
     # Surrogate evaluation
     eval_pred, config = candidate_evaluation.SurrogateEvaluation(config, results_folder=config['results_folder'])
 
@@ -37,12 +34,7 @@ def main():
         if eval_pred['x_feasible'].shape[0] > config['n_compositions_validate_max']:
             print('Number of potentially feasible candidates exceeds the set value for n_compositions_validate_max in the given configuration file', flush=True)
             print(f"Limiting the number of candidates to {config['n_compositions_validate_max']}", flush=True)
-            
-            if config['preselection_method'] == 'kmeans':
-                eval_pred = filtering.LimitNumberOfCompositions(eval_pred, config)
-            else:
-                raise Exception(f"config['preselection_method'] was set to {config['preselection_method']} which is not a valid method.")
-    
+            eval_pred = filtering.LimitNumberOfCompositions(eval_pred, config)
     # ThermoCalc validation
     print('ThermoCalc evaluation','\n'+'_'*48, flush=True)
     eval_sim = candidate_evaluation.ThermoCalcEvaluation(config, eval_pred)
