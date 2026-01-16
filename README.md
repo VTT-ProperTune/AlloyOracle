@@ -44,11 +44,7 @@ Run the **`data_generation/training_pool_generator.py`** to create composition p
 ### 2. Generate Dataset B
 Run the **`data_generation/calphad_data_generator.py`** to reproduce Dataset B `dataset_b.h5` using `compositions_b.h5` as input.
 
-**Note:** Due to CALPHAD convergence issues, some data points might be missing. The process involves iterative calculations:
-- Initial CALPHAD calculations
-- Comparison with input composition set
-- Recalculation of missing compositions
-- Repeat until most compositions are calculated
+**Note:** Due to CALPHAD convergence issues we iteratively checked which compositions were missing from the dataset, and repeated calculations for these compositions until all compositions were calculated in at least one temperature.
 
 ### 3. Postprocess and Split Dataset B
 Rung the **`data_generation/postprocess_and_split_dataset.py`** to process and split `dataset_b.h5` into development and test sets. This creates `dataset_b_dev.h5` and `dataset_b_test.h5`.
