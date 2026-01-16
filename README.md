@@ -41,7 +41,7 @@ Follow these steps to reproduce the datasets and results:
 ### 1. Generate Composition Pool for Generating Training Data
 Run the **`data_generation/training_pool_generator.py`** to create composition pool `compositions_b.h5`.
 
-### 1. Generate Dataset B
+### 2. Generate Dataset B
 Run the **`data_generation/calphad_data_generator.py`** to reproduce Dataset B `dataset_b.h5` using `compositions_b.h5` as input.
 
 **Note:** Due to CALPHAD convergence issues, some data points might be missing. The process involves iterative calculations:
@@ -50,19 +50,19 @@ Run the **`data_generation/calphad_data_generator.py`** to reproduce Dataset B `
 - Recalculation of missing compositions
 - Repeat until most compositions are calculated
 
-### 2. Postprocess and Split Dataset B
+### 3. Postprocess and Split Dataset B
 Rung the **`data_generation/postprocess_and_split_dataset.py`** to process and split `dataset_b.h5` into development and test sets. This creates `dataset_b_dev.h5` and `dataset_b_test.h5`.
 
-### 3. Train Surrogate Model
+### 4. Train Surrogate Model
 Run **`surrogate_modeling/main.py`** to create the surrogate model with optimized hyperparameters. Move the generated `model/` folder to the `screening/` folder.
 
-### 4. Generate Composition Pool
+### 5. Generate Composition Pool
 Create the composition candidate pool for screening with **`data_generation/screening_pool_generator.py`**. Move the generated `composition_pool_screening.h5` to the `screening/` folder.
 
-### 5. Perform Screening
+### 6. Perform Screening
 Execute the screening step with **`screening/main.py`** to identify feasible candidates. This produces `feasible_candidates.xlsx`.
 
-### 6. Analyze Results
+### 7. Analyze Results
 -`analyze_feasible_candidates/`: analyze the feasible compositions (alloy families, VEC-strength scatter plots).
 -`analyze_experimental_compositions`: contains the scripts to visualize DFT-derived properties (strength, D-parameters).
 
