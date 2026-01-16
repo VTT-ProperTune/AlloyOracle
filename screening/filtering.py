@@ -90,8 +90,5 @@ def LimitNumberOfCompositions(eval_results, config):
     eval_results['losses_feasible'] = eval_results['losses_feasible'].iloc[selected_indices]
     
     print('Number of compositions after preselection', eval_results['x_feasible'].shape[0], flush=True)
-
-    from candidate_evaluation import SaveEvalutionResults
-    SaveEvalutionResults(eval_results, config, pred_or_valid='surrogate_limited')
     
     return eval_results
